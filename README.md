@@ -9,7 +9,7 @@ Kyungmin Lee<sup>1\*</sup>, Sibeen Kim<sup>1\*</sup>, Dongyoon Hwang<sup>1\*</su
 [Project page](https://davian-robotics.github.io/FlashDexRetarget/) · [Paper](docs/static/FlashDexRetarget.pdf) · [Video](docs/static/videos/flashdexretarget_supp.mp4)
 
 FlashDexRetarget retargets a whole collection of human hand-object demonstrations to a dexterous robot hand with a single
-reference-conditioned RL policy: 72% success on a 50-motion benchmark with about 100x less training compute than CHORD.
+reference-conditioned RL policy: 90% success on a 50-motion benchmark with about 100x less training compute than CHORD.
 
 Code is coming soon. The project page is served by GitHub Pages from `docs/` on `main`.
 
