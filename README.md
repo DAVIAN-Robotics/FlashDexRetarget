@@ -4,7 +4,7 @@
 
 Kyungmin Lee<sup>1\*</sup>, Sibeen Kim<sup>1\*</sup>, Dongyoon Hwang<sup>1\*</sup>, Yoonsang Oh<sup>1\*</sup>, Donghu Kim<sup>2</sup>, Youngdo Lee<sup>2</sup>, I Made Aswin Nahrendra<sup>2</sup>, Jaegul Choo<sup>1&dagger;</sup>, Hojoon Lee<sup>2&dagger;</sup>
 
-<sup>1</sup>KAIST AI &nbsp; <sup>2</sup>Holiday Robotics &nbsp; <sup>\*</sup>Equal contribution &nbsp; <sup>&dagger;</sup>Co-corresponding authors
+<sup>1</sup>KAIST AI &nbsp; <sup>2</sup>Holiday Robotics &nbsp; <sup>\*</sup>Equal contribution &nbsp; <sup>&dagger;</sup>Corresponding author
 
 [Project page](https://davian-robotics.github.io/FlashDexRetarget/) · [Paper](docs/static/FlashDexRetarget.pdf) · [Video](docs/static/videos/flashdexretarget_supp.mp4)
 
