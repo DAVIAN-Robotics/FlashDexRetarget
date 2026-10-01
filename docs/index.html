@@ -94,8 +94,8 @@
       robot trajectories with <b>one reference-conditioned RL policy</b>, instead of optimizing every demonstration separately.
     </p>
     <div class="stats">
-      <div class="stat"><div class="num">90%</div><div class="lbl">retargeting success on the 50-motion benchmark (XHand, with object-size reward normalization) in 32 GPU-hours</div></div>
-      <div class="stat"><div class="num">~100&times;</div><div class="lbl">less training compute than CHORD (XHand: 32 vs. 2,847 GPU-hours), with 44 pp higher success</div></div>
+      <div class="stat"><div class="num">90%</div><div class="lbl">retargeting success on the 50-motion benchmark (XHand) in 29 GPU-hours</div></div>
+      <div class="stat"><div class="num">~100&times;</div><div class="lbl">less training compute than CHORD (XHand: 29 vs. 2,847 GPU-hours), with 44 pp higher success</div></div>
       <div class="stat"><div class="num">600+</div><div class="lbl">of 1,000 motions converted by one policy trained on the whole collection, within 600M steps</div></div>
     </div>
   </div>
@@ -106,7 +106,7 @@
     <h2>Video</h2>
     <div class="video-frame">
       <video controls playsinline preload="metadata" poster="static/images/video_poster.jpg">
-        <source src="static/videos/flashdexretarget_supp.mp4?v=2" type="video/mp4">
+        <source src="static/videos/flashdexretarget_supp.mp4?v=3" type="video/mp4">
       </video>
     </div>
   </div>
@@ -146,7 +146,8 @@
       <figcaption>
         <b>FlashDexRetarget at a glance.</b> Left and right hand policies are jointly trained across reference motions,
         avoiding repeated optimization for individual demonstrations, and successful rollouts are stored as robot data.
-        The right plot shows cumulative conversion success rate versus total GPU hours on a logarithmic scale.
+        The right plot shows cumulative conversion success rate versus total GPU hours on a logarithmic scale. CHORD
+        results are obtained with its released implementation, which is trained with PPO.
       </figcaption>
     </figure>
   </div>
@@ -325,11 +326,11 @@
           <tr><td>Do as I Do</td><td>Single</td><td>0.36</td><td>0.04</td><td>0.00</td><td>47.32</td><td>0.28</td><td>66</td></tr>
           <tr><td>DexMachina</td><td>Single</td><td>0.48</td><td>0.32</td><td>0.12</td><td>37.49</td><td>0.29</td><td>447</td></tr>
           <tr><td>CHORD</td><td>Single</td><td>0.46</td><td>0.02</td><td>0.00</td><td>55.70</td><td><b>0.16</b></td><td>2,847</td></tr>
-          <tr class="ours"><td>FlashDexRetarget<sup>&dagger;</sup></td><td>Multi</td><td>0.90</td><td>0.86</td><td>0.86</td><td>10.95</td><td style="font-weight:400">0.25</td><td>32</td></tr>
+          <tr class="ours"><td>FlashDexRetarget</td><td>Multi</td><td>0.90</td><td>0.86</td><td>0.86</td><td>10.95</td><td style="font-weight:400">0.25</td><td>29</td></tr>
           <tr class="group"><td colspan="8">(b) Sharpa Wave Hand</td></tr>
           <tr><td>Do as I Do</td><td>Single</td><td>0.64</td><td>0.10</td><td>0.10</td><td>58.33</td><td>0.24</td><td>62</td></tr>
           <tr><td>CHORD</td><td>Single</td><td>0.50</td><td>0.22</td><td>0.00</td><td>60.07</td><td><b>0.19</b></td><td>3,314</td></tr>
-          <tr class="ours"><td>FlashDexRetarget</td><td>Multi</td><td>0.72</td><td>0.60</td><td>0.60</td><td>17.28</td><td style="font-weight:400">0.29</td><td>36</td></tr>
+          <tr class="ours"><td>FlashDexRetarget</td><td>Multi</td><td>0.72</td><td>0.70</td><td>0.70</td><td>17.28</td><td style="font-weight:400">0.29</td><td>33</td></tr>
         </tbody>
       </table>
     </div>
@@ -337,8 +338,11 @@
       SR<sub>SPIDER</sub>: object position / rotation error within 10 cm / 0.5 rad, averaged over the objects of the active hands.
       SR<sub>MT-Obj</sub>: object within 3 cm / 30&deg;. SR<sub>MT</sub>: additionally fingertip and hand-joint position
       errors within 6 cm and 8 cm. MOPE / MORE: mean object position / rotation error over trajectories that satisfy SR<sub>SPIDER</sub>.
-      <br><sup>&dagger;</sup>Uses object-size normalization in the point-cloud matching reward. It is applied only to the XHand
-      result; the Sharpa Wave Hand, ablation, and scaling results do not yet use it.
+      Do as I Do and CHORD use their released implementations; the open-source CHORD implementation uses PPO.
+    </p>
+    <p>
+      The gap widens under the stricter SR<sub>MT</sub>, which also requires the robot hand to track the reference hand:
+      FlashDexRetarget reaches 86% on XHand and 70% on Sharpa Wave Hand, while no baseline exceeds 12%.
     </p>
 
     <h3>What makes multi-reference retargeting work</h3>
@@ -353,7 +357,7 @@
       <li><b>Observation.</b> Encoding future reference frames accumulates successful trajectories faster and converts more references than next-frame conditioning alone.</li>
       <li><b>Reward.</b> Removing both point-cloud matching and the interaction reward (with their observations) hurts most; either one helps, and both together is best.</li>
       <li><b>Architecture.</b> Separate left- and right-hand actor&ndash;critic pairs improve both learning speed and final success over a unified actor&ndash;critic.</li>
-      <li><b>RL algorithm.</b> PPO stays near zero within 300M steps while default FlashSAC converts about 32%; a larger buffer or a wider critic each help, and combining both is best.</li>
+      <li><b>RL algorithm.</b> PPO stays near zero within 300M steps while default FlashSAC converts about 34%; a larger buffer or a wider critic each help, and combining both is best.</li>
     </ul>
 
     <h3>Scaling to larger reference collections</h3>
@@ -364,11 +368,12 @@
       <div>
         <p>
           When one shared policy is trained on collections of 200, 500, and 1,000 motions (600M environment steps each),
-          larger collections yield more successfully retargeted motions within the same environment-interaction budget.
+          larger collections yield more successfully retargeted motions within the same environment-interaction budget:
+          164, 334, and 621 motions, respectively.
         </p>
         <p>
-          Sharing training across more references therefore increases the data-generation yield of a single training run:
-          more demonstrations in, more robot data out.
+          By sharing training across references, multi-reference tracking generates data more efficiently as the
+          collection grows, whereas the cost of single-reference retargeting grows linearly with the number of demonstrations.
         </p>
       </div>
     </div>
@@ -380,8 +385,7 @@
     <h2>Real-World Replay</h2>
     <p class="lead">
       We retarget real-world-captured human demonstrations and replay the successful simulated trajectories on a robot arm
-      with an XHand. This checks that the retargeted motions remain executable under real contact dynamics; it is not a
-      closed-loop deployed policy.
+      with an XHand, validating that the retargeted motions remain physically executable under real contact dynamics.
     </p>
 
     <div class="real-head">
