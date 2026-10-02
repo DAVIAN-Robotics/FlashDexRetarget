@@ -6,7 +6,7 @@ Kyungmin Lee<sup>1\*</sup>, Sibeen Kim<sup>1\*</sup>, Dongyoon Hwang<sup>1\*</su
 
 <sup>1</sup>KAIST AI &nbsp; <sup>2</sup>Holiday Robotics &nbsp; <sup>\*</sup>Equal contribution &nbsp; <sup>&dagger;</sup>Corresponding author
 
-[Project page](https://davian-robotics.github.io/FlashDexRetarget/) · [Paper](docs/static/FlashDexRetarget.pdf) · [Video](docs/static/videos/flashdexretarget_supp.mp4)
+[Project page](https://davian-robotics.github.io/FlashDexRetarget/) · [arXiv](https://arxiv.org/abs/2610.01849) · [Paper](docs/static/FlashDexRetarget.pdf) · [Video](docs/static/videos/flashdexretarget_supp.mp4)
 
 FlashDexRetarget retargets a whole collection of human hand-object demonstrations to a dexterous robot hand with a single
 reference-conditioned RL policy: 90% success on a 50-motion benchmark with about 100x less training compute than CHORD.
@@ -16,10 +16,11 @@ Code is coming soon. The project page is served by GitHub Pages from `docs/` on 
 ## Citation
 
 ```bibtex
-@misc{lee2026flashdexretarget,
-  title  = {FlashDexRetarget: Accelerating Dexterous Manipulation Data Generation through Multi-Motion Retargeting},
-  author = {Lee, Kyungmin and Kim, Sibeen and Hwang, Dongyoon and Oh, Yoonsang and Kim, Donghu and
-            Lee, Youngdo and Nahrendra, I Made Aswin and Choo, Jaegul and Lee, Hojoon},
-  year   = {2026}
+@article{lee2026flashdexretarget,
+  title   = {FlashDexRetarget: Accelerating Dexterous Manipulation Data Generation through Multi-Motion Retargeting},
+  author  = {Lee, Kyungmin and Kim, Sibeen and Hwang, Dongyoon and Oh, Yoonsang and Kim, Donghu and
+             Lee, Youngdo and Nahrendra, I Made Aswin and Choo, Jaegul and Lee, Hojoon},
+  journal = {arXiv preprint arXiv:2610.01849},
+  year    = {2026}
 }
 ```
